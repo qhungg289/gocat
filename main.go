@@ -9,6 +9,10 @@ import (
 func main() {
 	args := os.Args[1:]
 
+	if len(args) == 0 {
+		log.Fatal("Please provide correct path to file. Example: gocat sample.txt")
+	}
+
 	file, err := os.Open(args[0])
 	if err != nil {
 		log.Fatal(err)
@@ -26,7 +30,8 @@ func main() {
 	}
 
 	fmt.Printf("Name: %v, Size: %v bytes, Modified: %v\n", stat.Name(), stat.Size(), stat.ModTime())
-	fmt.Println(string(b))
+	fmt.Println("---")
+	fmt.Print(string(b))
 
 	if err = file.Close(); err != nil {
 		log.Fatal(err)
